@@ -3,21 +3,34 @@ using System.Collections.Generic;
 
 namespace Cars.Models 
 {
-  class Type 
+  public class Car 
   {
-    public int Year;
-    public string Model;
-    public string Color;
-    public float Price;
-    public void Car (int year,string model, string color, float price)
+    public int Year { get; set; }
+    public string Model { get; set; }
+    public string Color { get; set; }
+    public int Price { get; set; }
+    private static List<Car> _instances = new List<Car> { };
+    
+    public Car (int year, string model, string color, int price)
     {
-      this.Year = year;
-      this.Model = model;
-      this.Color = color;
-      this.Price = price;
+       Year = year;
+       Model = model;
+       Color = color;
+       Price = price;
+      _instances.Add(this);
     }
 
-    public bool canAfford(float maxPrice)
+    public static List<Car> GetAll()
+    {
+      return _instances;
+    }
+
+    public static void ClearAll()
+    {
+      _instances.Clear();
+    }
+
+    public bool CanAfford(int maxPrice)
     {
       if (this.Price < maxPrice)
       {
@@ -26,7 +39,7 @@ namespace Cars.Models
       return false;
     }
 
-    public bool checkColor(string color)
+    public bool CheckColor(string color)
     {
       if (this.Color == color)
       {
@@ -35,7 +48,7 @@ namespace Cars.Models
       return false;
     }
 
-    public string printCars()
+    public string PrintCars()
     {
       string outputCarsProperties = "Year: " + this.Year + ", Model: " + this.Model + 
       ", Color: " + this.Color + ", Price: " + this.Price;
@@ -45,32 +58,3 @@ namespace Cars.Models
   }
 }
 
-
-
-  // class InterfaceProgramm
-  //   {
-  //       public static void Main()
-  //       {
-  //           Console.WriteLine("Please enter color: ");
-  //           string inputColor = Console.ReadLine();
-  //           Console.WriteLine("Please enter price: ");
-  //           float inputPrice = float.Parse(Console.ReadLine());
-
-  //           Car car1 = new Car(2000, "Honda", "Black", 5500);
-  //           Car car2 = new Car(2009, "Nissan", "Red", 5000);
-  //           Car car3 = new Car(2015, "Toyota", "Black", 15000);
-  //           Car car4 = new Car(2015, "Ford", "White", 30000);
-  //           Car car5 = new Car(2010, "Chevrolet", "Blue", 5600);
-
-  //           List<Car> cars = new List<Car>(){car1, car2, car3, car4, car5};
-
-  //           for (int idx = 0; idx < cars.Count; idx++)
-  //           {
-  //               if (cars[idx].checkColor(inputColor) && cars[idx].canAfford(inputPrice))
-  //               {
-  //                   Console.WriteLine(cars[idx].printCars());
-  //               }
-  //           }
-            
-  //       }
-  //   }

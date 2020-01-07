@@ -1,0 +1,13 @@
+@using Cars.Models;
+
+<h1>Car Index.cshtml</h1>
+
+<ul>
+  @foreach (Car item in Model)
+  {
+    <li>@item.PrintCars()</li>
+  }
+</ul>
+
+<a href="/items/new">Add a new item.</a>
+
